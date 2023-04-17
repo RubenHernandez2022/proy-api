@@ -13,7 +13,7 @@ app.get('/pedirProducto',todoProd);//peticion get que me traer a todos los artic
 
 
 app.post('/agregarProducto',agregarUnProducto);
-//http://localhost:4001/addarticulo
+//http://localhost:4000/agragarProducto
 
 app.listen(puerto,()=>{
     console.log(`Escuchando por el puerto  ${puerto}`)
