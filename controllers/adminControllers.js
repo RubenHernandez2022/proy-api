@@ -4,17 +4,20 @@ const Articulos=[
   {
      TipoProd:"Materiales",
      Producto:"Cemento",
-     Marca:"Loma Negra"
+     Marca:"Loma Negra",
+     Imagen:"./imagenes/cemento loma-negra.jpg"
   }
  ,{
      TipoProd:"Herramientas",
      Producto:"pala",
-     Marca:"la mas"
+     Marca:"la mas",
+     Imagen:"./imagenes/pala.jpg"
   }
  ,{
     TipoProd:"Materiales",
     Producto:"Cal",
-    Marca:"Grobo"
+    Marca:"Santa Barbara",
+    Imagen:"./imagenes/cal santa-barbara.jpg"
   }
  ]
 /*---------------*/
@@ -31,9 +34,9 @@ const todoProd=(req,res)=>{
 
 const agregarUnProducto =(req,res)=>{
 
-  const {tipoProd,producto,marca}=req.body// de toda la info del formulario, input
-  console.log(tipoProd)
-  Articulos.push({TipoProd:tipoProd,Producto:producto,Marca:marca})
+  const {tipoProducto,producto,marca}=req.body// de toda la info del formulario, input
+ 
+  Articulos.push({TipoProd:tipoProducto,Producto:producto,Marca:marca})
   console.log(Articulos)
 
 // res.send(" nombre articulo recibido")
