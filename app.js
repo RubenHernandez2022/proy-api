@@ -3,27 +3,6 @@ const {todoProd,agregarUnProducto} = require('./controllers/adminControllers');
 const cors =require('cors');
 const app= express();
 const puerto=4000;
-//base de datos---------------------------------------------
-// require('./database');
-// let mongoose= require('mongoose');
-// let Articulos =require('./modelArticulos');
-// let Articulo= mongoose.model('Artículo',Articulos);
-
-// let doc= new Articulo({tipoProd:String})
-// console.log({doc})
-// let unArticulo= new Articulo(
-//     {tipoProd:"herramienta",
-//      Producto:"SERRUCHO",
-//      Marca:"5260"}
-// )
-
-
-// //usando insertOne
-
-// doc.collection.insertOne(unArticulo)
-// .then((info)=>console.log(info))
-// .catch(err=>console.log(err))
-//-------------------------------------------------------------
 
 app.use(express.json());
 app.use(cors());// por si el navegador nos tira un error porque estamos queriendo consumir de un dominio a otro 
