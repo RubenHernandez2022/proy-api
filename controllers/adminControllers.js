@@ -24,42 +24,51 @@ const Articulos=[
 require('../database');
  let mongoose= require('mongoose');
  let ArticulosDB =require('../modelArticulos');
- let ArticuloDB= mongoose.model('Artículo',ArticulosDB);
+ let Articulo= mongoose.model('Artículo',ArticulosDB);
 
-const todoProd=(req,res)=>{
+//desde un array ficticio 
+//const todoProd=(req,res)=>{
+// res.status(200) -> valor por defecto,estado OK
+//let infoJSON=JSON.stringify(Articulos)se envie en formato JSON
+//  console.log(infoJSON)
+// res.send(infoJSON)//};
 
- // res.status(200) -> valor por defecto,estado OK
+const todoProd=async()=>{
+      let articulosGuardados= await Articulo.find();
+     // console.log(articulosGuardados)
+      return articulosGuardados
+}
 
- let infoJSON=JSON.stringify(Articulos)// se envie en formato JSON
- console.log(infoJSON)
- res.send(infoJSON)
+const traerInfo=async(req,res)=>{
+     let info= await todoProd();
+     console.log("mostrar"+info);
+     res.send(info);
 };
 
 
-
 const agregarUnProducto =(req,res)=>{
-
-  const {tipoProducto,producto,marca}=req.body// de toda la info del formulario, input
- 
-  Articulos.push({TipoProd:tipoProducto,Producto:producto,Marca:marca})
-  console.log(Articulos)
   
-  let doc= new ArticuloDB({tipoProducto:String,Producto:String,Marca:String})
+   const {tipoProducto,producto,marca}=req.body// de toda la info del formulario, input
+ //--si utilizara un array
+  // Articulos.push({TipoProd:tipoProducto,Producto:producto,Marca:marca})
+  
+  
+ let doc= new Articulo({tipoProducto:String,Producto:String,Marca:String})
 
- let unArticulo= new ArticuloDB(
+ let unArticulo= new Articulo(
     {tipoProducto:tipoProducto,
       Producto:producto,
       Marca:marca
     }
  )
- doc.collection.insertOne(unArticulo)
-.then((info)=>console.log(info))
-.catch(err=>console.log(err))
-
+  doc.collection.insertOne(unArticulo)
+ .then((info)=>console.log(info))
+ .catch(err=>console.log(err))
+ 
 // res.send(" nombre articulo recibido")
   res.redirect("http://localhost:3000/")
-  
+ 
 };
 
 
-module.exports={todoProd,agregarUnProducto}
+module.exports={agregarUnProducto,traerInfo}

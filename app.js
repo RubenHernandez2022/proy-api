@@ -1,5 +1,5 @@
 const express=require('express');
-const {todoProd,agregarUnProducto} = require('./controllers/adminControllers');
+const {agregarUnProducto,traerInfo} = require('./controllers/adminControllers');
 const cors =require('cors');
 const app= express();
 const puerto=4000;
@@ -9,7 +9,7 @@ app.use(cors());// por si el navegador nos tira un error porque estamos queriend
 app.use(express.urlencoded({extended:true}))//para poder recibir la info de un formulario en formato de objeto 
 
 
-app.get('/pedirProducto',todoProd);//peticion get que me traer a todos los articulos
+app.get('/pedirProducto',traerInfo);//peticion get que me traer a todos los articulos
 
 
 app.post('/agregarProducto',agregarUnProducto);
