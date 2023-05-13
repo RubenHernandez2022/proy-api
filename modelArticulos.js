@@ -1,6 +1,6 @@
 let mongoose= require('mongoose');
 
-let ArticulosScheme = new mongoose.Schema({
+let ArticulosSchema = new mongoose.Schema({
     tipoProducto:{
         type:String,
         required:true     ,
@@ -15,4 +15,4 @@ let ArticulosScheme = new mongoose.Schema({
 }
 )
 
-module.exports=ArticulosScheme;
+module.exports=ArticulosSchema;

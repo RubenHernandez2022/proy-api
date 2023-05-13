@@ -1,12 +1,12 @@
 // info  de una Base de Datos
 
-const Articulos=[
-  {
-     TipoProd:"Materiales",
-     Producto:"Cemento",
-     Marca:"Loma Negra",
-     Imagen:"./imagenes/cemento loma-negra.jpg"
-  }
+// const Articulos=[
+//   {
+//      TipoProd:"Materiales",
+//      Producto:"Cemento",
+//      Marca:"Loma Negra",
+//      Imagen:"./imagenes/cemento loma-negra.jpg"
+//   }
 //  ,{
 //      TipoProd:"Herramientas",
 //      Producto:"pala",
@@ -19,13 +19,8 @@ const Articulos=[
 //     Marca:"Santa Barbara",
 //     Imagen:"./imagenes/cal santa-barbara.jpg"
 //   }
- ]
+//  ]
 /*---------------*/
-require('../database');
- let mongoose= require('mongoose');
- let ArticulosDB =require('../modelArticulos');
- let Articulo= mongoose.model('Artículo',ArticulosDB);
-
 //desde un array ficticio 
 //const todoProd=(req,res)=>{
 // res.status(200) -> valor por defecto,estado OK
@@ -33,11 +28,15 @@ require('../database');
 //  console.log(infoJSON)
 // res.send(infoJSON)//};
 
-const todoProd=async()=>{
-      let articulosGuardados= await Articulo.find();
-     // console.log(articulosGuardados)
-      return articulosGuardados
-}
+require('../database');
+const{todoProd}=require("../utiles/funcionesDB")
+let mongoose= require('mongoose');
+let ArticulosDB =require('../modelArticulos');
+let Articulo= mongoose.model('Artículo',ArticulosDB);
+
+
+
+
 
 const traerInfo=async(req,res)=>{
      let info= await todoProd();
