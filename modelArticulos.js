@@ -1,9 +1,13 @@
 let mongoose= require('mongoose');
 
 let ArticulosSchema = new mongoose.Schema({
+    imagen:{
+        type:String
+    }
+    ,
     tipoProducto:{
         type:String,
-        required:true     ,
+        required:true
     },
     Producto:{
         type:String,
