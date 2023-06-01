@@ -48,8 +48,8 @@ const agregarUnProducto =(req,res)=>{
    const {tipoProducto,producto,marca}=req.body// de toda la info del formulario, input
    //--si utilizara un array
    // Articulos.push({TipoProd:tipoProducto,Producto:producto,Marca:marca})
-   console.log(req.body)
-    console.log(imagen)
+   
+    
    let doc= new Articulo({imagen:String,tipoProducto:String,Producto:String,Marca:String})
   
    let unArticulo= new Articulo(
@@ -64,40 +64,31 @@ const agregarUnProducto =(req,res)=>{
    doc.collection.insertOne(unArticulo)
   .then((info)=>console.log(info))
   .catch(err=>console.log(err))
-  // res.send(" nombre articulo recibido")
-   res.redirect("http://localhost:3000/")
+   res.redirect("http://localhost:3000/Administrador")
   
 };
 
-//  const agregarImagen=(req,res)=>{
-    
-//    console.log(req.file)
-//    const imagen="http://localhost:4000/public/"+req.file.filename
-//   //  res.send("foto cargada")
-//   // res.send("http://localhost:3000/")
- 
-//   console.log(imagen)
-//  let doc= new Articulo({imagen:String})
-
-//  let unArticulo= new Articulo(
-//     {
-//      imagen:imagen
-//     }
-//   )
-//  doc.collection.insertOne(unArticulo)
-// .then((info)=>console.log(info))
-// .catch(err=>console.log(err))
-// // res.send(" nombre articulo recibido")
-//  res.redirect("http://localhost:3000/")
-
-// }
 
 const eliminarProducto=async(req,res)=>{
-  let info= await eliminarUnProducto();
+  const {tipoProducto,Producto}=req.body;
+  console.log("este es el"+tipoProducto+Producto)
+  let info= await eliminarUnProducto({tipoProducto,Producto});
   console.log("borrar"+info);
-  res.send(info);
+//   res.send(info+"se elimino correctamente")                                 
+  res.redirect("http://localhost:3000/FormuAgregar/Eliminar")                                                
+ // res.send(info);
+  
 };
 
+// const cargarimagen=async(req,res)=>{
+//   const {tipoProducto,Producto}=req.body;
+//   console.log("este es el"+tipoProducto+Producto)
+//   let info= await eliminarUnProducto({tipoProducto,Producto});
+//   console.log("borrar"+info);
+// //   res.send(info+"se elimino correctamente")                                 
+//   res.redirect("http://localhost:3000/Administrador")                                                
+//  // res.send(info);
+  
+//};
 
 module.exports={agregarUnProducto,traerInfo,eliminarProducto}
-//,agregarImagen

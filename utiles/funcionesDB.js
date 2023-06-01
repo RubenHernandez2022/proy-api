@@ -8,8 +8,9 @@ const todoProd=async()=>{
     return articulosGuardados
 }
 
-const eliminarUnProducto=async()=>{
-    let resultado=await Articulo.deleteOne();
+const eliminarUnProducto=async({tipoProducto,Producto})=>{
+   
+    let resultado=await Articulo.deleteOne({tipoProducto:tipoProducto,Producto:Producto});
     return resultado
 }
 
