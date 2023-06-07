@@ -1,5 +1,5 @@
 const express=require('express');
-const {agregarUnProducto,traerInfo,eliminarProducto}= require('./controllers/adminControllers');
+const {agregarUnProducto,traerInfo,eliminarProducto,actualizarArticulo}= require('./controllers/adminControllers');
 // ,agregarImagen
 const cors =require('cors');
 const app= express();
@@ -12,17 +12,13 @@ app.use(express.urlencoded({extended:true}))//para poder recibir la info de un f
 app.use(("/public"),express.static("./imagenes"))
 
 
-
 app.get('/pedirProducto',traerInfo);//peticion get que me traer a todos los articulos
 
-
 app.post('/agregarProducto',upload.single('imagen'),agregarUnProducto);
-//http://localhost:4000/agragarProducto
-
- //app.post('/cargarImagen',upload.single('imagen'),agregarImagen)
 
 app.delete('/eliminarProducto',eliminarProducto,traerInfo);
 
+app.put("/modifArticulo/:id",actualizarArticulo)
 
 app.listen(puerto,()=>{
     console.log(`Escuchando por el puerto  ${puerto}`)

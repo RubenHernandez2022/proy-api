@@ -1,5 +1,4 @@
 // info  de una Base de Datos
-
 // const Articulos=[
 //   {
 //      TipoProd:"Materiales",
@@ -29,7 +28,7 @@
 // res.send(infoJSON)//};
 
 require('../database');
-const{todoProd,eliminarUnProducto}=require("../utiles/funcionesDB")
+const{todoProd,eliminarUnProducto,actualizaUnProducto}=require("../utiles/funcionesDB")
 let mongoose= require('mongoose');
 let ArticulosDB =require('../modelArticulos');
 let Articulo= mongoose.model('Artículo',ArticulosDB);
@@ -37,7 +36,7 @@ let Articulo= mongoose.model('Artículo',ArticulosDB);
 
 const traerInfo=async(req,res)=>{
      let info= await todoProd();
-     console.log("mostrar"+info);
+    //  console.log("mostrar"+info);
      res.send(info);
 };
 
@@ -49,7 +48,6 @@ const agregarUnProducto =(req,res)=>{
    //--si utilizara un array
    // Articulos.push({TipoProd:tipoProducto,Producto:producto,Marca:marca})
    
-    
    let doc= new Articulo({imagen:String,tipoProducto:String,Producto:String,Marca:String})
   
    let unArticulo= new Articulo(
@@ -60,12 +58,10 @@ const agregarUnProducto =(req,res)=>{
        Marca:marca
       }
     )
-   
    doc.collection.insertOne(unArticulo)
   .then((info)=>console.log(info))
   .catch(err=>console.log(err))
    res.redirect("http://localhost:3000/Administrador")
-  
 };
 
 
@@ -80,15 +76,19 @@ const eliminarProducto=async(req,res)=>{
   
 };
 
-// const cargarimagen=async(req,res)=>{
-//   const {tipoProducto,Producto}=req.body;
-//   console.log("este es el"+tipoProducto+Producto)
-//   let info= await eliminarUnProducto({tipoProducto,Producto});
-//   console.log("borrar"+info);
-// //   res.send(info+"se elimino correctamente")                                 
-//   res.redirect("http://localhost:3000/Administrador")                                                
-//  // res.send(info);
+const actualizarArticulo=async(req,res)=>{
   
-//};
+  //const id=req.params.id;
+  const {tipoProducto,Producto,Marca}=req.body;
+  let info= await actualizaUnProducto({tipoProducto:tipoProducto},{Producto:Producto},{Marca:Marca});
+  // console.log(id)
+  console.log(req.body)
+  
+ 
+  // res.redirect("http://localhost:3000/FormuAgregar") 
+          console.log("modificadoo")
+          res.send("SOY PUT"+info)
+}
+  
 
-module.exports={agregarUnProducto,traerInfo,eliminarProducto}
+module.exports={agregarUnProducto,traerInfo,eliminarProducto,actualizarArticulo}

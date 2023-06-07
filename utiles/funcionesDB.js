@@ -14,4 +14,13 @@ const eliminarUnProducto=async({tipoProducto,Producto})=>{
     return resultado
 }
 
-module.exports={todoProd,eliminarUnProducto}
+  const actualizaUnProducto=async(filtro,{tipoProducto})=>{
+   
+      let resultado=await Articulo.updateOne(filtro,{$Set:{tipoProducto:tipoProducto}});
+       console.log(resultado)
+     return resultado
+     
+  }
+
+module.exports={todoProd,eliminarUnProducto,actualizaUnProducto}
+// ,actualizarUnProducto
