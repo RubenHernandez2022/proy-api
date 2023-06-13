@@ -29,9 +29,12 @@
 
 require('../database');
 const{todoProd,eliminarUnProducto,actualizaUnProducto}=require("../utiles/funcionesDB")
+
+
 let mongoose= require('mongoose');
 let ArticulosDB =require('../modelArticulos');
 let Articulo= mongoose.model('Artículo',ArticulosDB);
+
 
 
 const traerInfo=async(req,res)=>{
@@ -44,31 +47,32 @@ const traerInfo=async(req,res)=>{
 const agregarUnProducto =(req,res)=>{
    
    const imagen="http://localhost:4000/public/"+req.file.filename;
-   const {tipoProducto,producto,marca}=req.body// de toda la info del formulario, input
+   const {tipoProducto,producto,marca}=req.body
    //--si utilizara un array
    // Articulos.push({TipoProd:tipoProducto,Producto:producto,Marca:marca})
    
-   let doc= new Articulo({imagen:String,tipoProducto:String,Producto:String,Marca:String})
+   let doc= new Articulo({imagen:String,tipoProducto:String,producto:String,marca:String})
   
    let unArticulo= new Articulo(
       {
        imagen:imagen,
        tipoProducto:tipoProducto,
-       Producto:producto,
-       Marca:marca
+       producto:producto,
+       marca:marca
       }
     )
    doc.collection.insertOne(unArticulo)
   .then((info)=>console.log(info))
   .catch(err=>console.log(err))
    res.redirect("http://localhost:3000/Administrador")
+   
 };
 
 
 const eliminarProducto=async(req,res)=>{
-  const {tipoProducto,Producto}=req.body;
-  console.log("este es el"+tipoProducto+Producto)
-  let info= await eliminarUnProducto({tipoProducto,Producto});
+  const {tipoProducto,producto}=req.body;
+  console.log("este es el"+tipoProducto+producto)
+  let info= await eliminarUnProducto({tipoProducto,producto});
   console.log("borrar"+info);
 //   res.send(info+"se elimino correctamente")                                 
   res.redirect("http://localhost:3000/FormuAgregar/Eliminar")                                                
@@ -76,19 +80,28 @@ const eliminarProducto=async(req,res)=>{
   
 };
 
-const actualizarArticulo=async(req,res)=>{
+
+  const actualizarArticulo=async(req,res)=>{
+    //const id=req.params._id;
+    //console.log("soy el id"+id)
+    const {_id,tipoProducto,producto,marca}=req.body;
+    console.log("este ACTUALIZO"+_id+tipoProducto+producto+marca)
+    let info= await actualizaUnProducto(_id,tipoProducto,producto,marca);
+    
+    console.log(req.body)
+    console.log("modificadoo")
+    res.send("SOY PUT"+info)
+    //res.redirect("http://localhost:3000/FormuAgregar"+info)
+    //navigate("/eliminarProducto")
+  }
   
-  //const id=req.params.id;
-  const {tipoProducto,Producto,Marca}=req.body;
-  let info= await actualizaUnProducto({tipoProducto:tipoProducto},{Producto:Producto},{Marca:Marca});
-  // console.log(id)
-  console.log(req.body)
   
- 
-  // res.redirect("http://localhost:3000/FormuAgregar") 
-          console.log("modificadoo")
-          res.send("SOY PUT"+info)
-}
+  
+      
+      
+     
+    
+         
   
 
 module.exports={agregarUnProducto,traerInfo,eliminarProducto,actualizarArticulo}

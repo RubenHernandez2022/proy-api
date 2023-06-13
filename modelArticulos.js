@@ -9,11 +9,11 @@ let ArticulosSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    Producto:{
+    producto:{
         type:String,
         required:true
     },
-    Marca:{
+    marca:{
         type:String
     }
 }

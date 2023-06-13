@@ -18,7 +18,7 @@ app.post('/agregarProducto',upload.single('imagen'),agregarUnProducto);
 
 app.delete('/eliminarProducto',eliminarProducto,traerInfo);
 
-app.put("/modifArticulo/:id",actualizarArticulo)
+app.put("/modifArticulo/:_id",actualizarArticulo)
 
 app.listen(puerto,()=>{
     console.log(`Escuchando por el puerto  ${puerto}`)
