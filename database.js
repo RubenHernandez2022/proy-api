@@ -16,7 +16,6 @@ async function main() {
     await mongoose.connect(`mongodb+srv://${user}:${password}@cluster0.5qfuk3v.mongodb.net/?retryWrites=true&w=majority`)
 };
 
-
 main()
 .then((respOk)=>{console.log("Conexion exitosa!!!")})
 .catch((err)=>{console.log("Error en la conexion"+ err)})
